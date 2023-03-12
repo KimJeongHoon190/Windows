@@ -1,0 +1,15 @@
+2012a10x             AD DC = hedgehog.com
+Account 생성    user1,user2
+
+
+미션 : 2012b10x ~ 2003b10x 까지 3대를 모두 도메인 조인하기
+--> 준비물 : 그 전에 2012b10x ~ 2003b10x 각각 에서 npca.cpl 치고 가서 DNS서버 자리에 DC(2012a10x)의 IP를 적어야한다.  
+
+스크립트 짜기(배치 파일)
+
+netdom join "2012b10x" /domain:"hedgehog.com" /userd:"administrator" /passwordd:"qwe@123" /reboot:0
+netdom join "2003a10x" /domain:"hedgehog.com" /userd:"administrator" /passwordd:"qwe@123" /reboot:0
+netdom join "2003b10x" /domain:"hedgehog.com" /userd:"administrator" /passwordd:"qwe@123" /reboot:0
+
+--> 이거 notepad 실행해서 적은 다음에 확장자 .bat로 해서 바탕화면에 저장해라
+    더블클릭하면 바로 실행되는 걸 볼 수 있다. ( 2012b10x ~ 2003b10x가 모조리 재부팅 된다 --> 다시 켜지고 sysdm.cpl을 치면 hedgehog.com 도메인 가입이 된 걸 확인 가능
