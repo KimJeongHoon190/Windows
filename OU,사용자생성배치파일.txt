@@ -1,0 +1,40 @@
+cmd나 batch파일로 ou 등을 생성해보자(GUI 대신 CLI로 다시 진행하는 실습!!!)
+
+---------------------------------------------
+ou 생성 >>                           띄어쓰기 하지 말기(""로 표시된 부분)(근데 ""로 표시 안할 경우에도 알아서 띄어쓰기 하지말고 실행해라)
+
+dsadd OU "OU=관리부,DC=hanbit,DC=com"
+dsadd OU "OU=회계부,DC=hanbit,DC=com"
+
+dsadd OU "OU=공정팀,OU=관리부,DC=hanbit,DC=com"  : OU안에 OU를 생성하기
+dsadd ou ou=인사팀,ou=관리부,dc=hanbit,dc=com : 이런 식으로 대문자 안쓰고 따옴표 안쓰고해도 실행이 된다
+중요!! 그런데 "" 써야하는 경우는 CN(common name)이 cn = hedgehoon man 이런 식으로 CN에 공백이 들어가는 경우는 ""를 써야한다.
+
+
+삭제를 할 경우 : dsrm ou=공정팀,ou=관리부,dc=hanbit,dc=com   생성할 때와는 다르게 앞에 형식 ou 이런 걸 안붙인다. 
+dsrm 명령어 뒤에 -noprompt 옵션을 붙이면 삭제할거냐고 묻지 않고 바로 삭제한다
+
+가끔 마우스로 OU를 생성했을 때 삭제 안되도록 보호 표시 체크된 상태로 만들면 
+OU를 삭제해려해도 안된다. 이 떄는 active directory 사용자 및 컴퓨터 보기 -> 고급 기능 -> 삭제하려는 OU 마우스 오른쪽 버튼 -> 속성 -> 개체 
+-> 실수로 삭제되지 않도록 개체 보호 체크 끈다 -> 확인 -> 그리고 나와서 삭제
+
+------------------------------------------------
+user 생성 >>   p.656 실습
+
+dsadd user cn=이경규,ou=관리부,dc=hanbit,dc=com -SAMID kklee -UPN kklee@hanbit.com -PWD qwe@123 -canchpwd no -pwdneverexpires yes
+패스워드 바꿀 수 없고 패스워드가 만료되지 않는다
+
+
+--------------------------------------------------
+생성된 user 위치 옮기기 >>   p.661 실습
+
+dsmove "cn=김 국진,dc=hanbit,dc=com" -newparent ou=관리부,dc=hanbit,dc=com
+사용자 템플릿으로 생성한 hanbit.com에 있는 김 국진이란 사용자를 관리부 ou 밑으로 보낸다.
+                                  (원래 생성된 자리)                            (새로운 자리)
+
+
+dsmove "cn=안 성기,dc=hanbit,dc=com" -newparent ou=기술부,dc=hanbit,dc=com 
+dsmove "cn=박 중훈,dc=hanbit,dc=com" -newparent ou=기술부,dc=hanbit,dc=com
+
+dsmove "cn=서 태지,dc=hanbit,dc=com" -newparent ou=회계부,dc=hanbit,dc=com
+dsmove "cn=김 장훈,dc=hanbit,dc=com" -newparent ou=회계부,dc=hanbit,dc=com
