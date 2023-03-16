@@ -1,0 +1,21 @@
+GUI보다는 CLI에 익숙해지자 >>
+
+
+dsadd user "cn=한빛 사용자,dc=hanbit,dc=com" -upn hanbitUser@hanbit.com 
+-pwd qwe@123 -canchpwd no -pwdneverexpires yes
+
+
+
+dsadd group cn=한빛글로벌그룹,dc=hanbit,dc=com -scope g
+dsadd group cn=한빛도메인로컬그룹,dc=hanbit,dc=com -scope l
+dsadd group cn=한빛유니버설그룹,dc=hanbit,dc=com -scope u
+
+
+
+dsadd user "cn=세컨 사용자,dc=hanbit,dc=com" -pwd qwe@123 -upn secondUser@second.hanbit.com
+-canchpwd no -pwdneverexpires yes
+
+
+
+dsadd group cn=한빛글로벌그룹,dc=hanbit,dc=com -scope g -members cn=hanbitUser,dc=hanbit,dc=com
+"cn=세컨 사용자,dc=second,dc=hanbit,dc=com"
