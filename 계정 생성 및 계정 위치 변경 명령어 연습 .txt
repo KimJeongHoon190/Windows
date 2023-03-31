@@ -1,0 +1,15 @@
+계정 생성 및 계정 위치 변경 연습 >>
+
+
+dsadd user "cn=박 중훈,ou=기술부,dc=hanbit,dc=com" -upn jhpark@hanbit.com -pwd qwe@123
+-canchpwd no -pwdneverexpires yes
+dsadd user "cn=안 성기,ou=기술부,dc=hanbit,dc=com" -upn skahn@hanbit.com -pwd qwe@123 
+-canchpwd no -pwdneverexpires yes
+
+dsadd ou ou=기술1팀,ou=기술부,dc=hanbit,dc=com
+dsadd ou ou=기술2팀,ou=기술부,dc=hanbit,dc=com
+
+dsmove "cn=박 중훈,ou=기술부,dc=hanbit,dc=com" -newparent ou=기술1팀,ou=기술부,dc=hanbit,
+dc=com
+dsmove "cn=안 성기,ou=기술부dc=hanbit,dc=com" -newparent ou=기술2팀,ou=기술부,dc=hanbit,
+dc=com
